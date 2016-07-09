@@ -22,11 +22,11 @@ void drawDownButton(int x, int y)
 
 void showDOW(byte dow)
 {
-const char* str[] = {"MON","TUE","WED","THU","FRI","SAT","SUN"};
+const char* str[] = {"","MON","TUE","WED","THU","FRI","SAT","SUN"};
   
   myGLCD.setColor(128, 128, 255);
   myGLCD.setBackColor(0, 0, 0);
-  myGLCD.print(str[dow-1], 26, 167);
+  myGLCD.print(str[dow], 26, 167);
 }
 
 int bin_to_bcd(int temp)//decimal to BCD
@@ -604,6 +604,7 @@ void setClock()
 	  tm.Minute  = t_temp_min;
 	  tm.Second  = t_temp_sec;
 	  tm.Day     = t_temp_date;
+	  tm.Wday    = t_temp_dow;
 	  tm.Month   = t_temp_mon;
 	  tm.Year    = t_temp_year-1970;
 	  RTC.write(tm);

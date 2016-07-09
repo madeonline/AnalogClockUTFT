@@ -17,7 +17,7 @@ tmElements_t tm;
 int clockCenterX     = 119;
 int clockCenterY     = 119;
 int oldsec=0;
-const char* str[]          = {"SUN","MON","TUE","WED","THU","FRI","SAT"};
+const char* str[]          = {"","MON","TUE","WED","THU","FRI","SAT","SUN"};
 const char* str_mon[]      = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 
 //++++++++++++++++++++++++++++++++ Программы часов ++++++++++++++++++++++++++++++++++++
@@ -218,11 +218,11 @@ void drawHour(int h, int m)
 }
 void printDate()
 {
+  RTC.read(tm);
   myGLCD.setFont(BigFont);
   myGLCD.setColor(0, 0, 0);
   myGLCD.setBackColor(255, 255, 255);
-	
-  myGLCD.print(str[weekday()-1], 256, 8);
+  myGLCD.print(str[tm.Wday], 256, 8);
   if (tm.Day<10)
 	myGLCD.printNumI(tm.Day, 272, 28);
   else
@@ -241,9 +241,9 @@ void AnalogClock()
 {
 	int x, y;
 	drawDisplay();
+//	RTC.read(tm);
 	printDate();
-	RTC.read(tm);
-  
+
 	while (true)
 	{
 	RTC.read(tm);
